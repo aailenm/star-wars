@@ -2,6 +2,7 @@ import express from 'express';
 import fetch from 'node-fetch';
 import keyBy from 'lodash/keyby.js';
 import sortBy from 'lodash/sortby.js';
+import toNumber from 'lodash/toNumber.js';
 
 const app = express();
 const port = 5100;
@@ -10,6 +11,11 @@ const API_BASE_URL = 'https://swapi.dev/api';
 const PEOPLE_ENDPOINT = `${API_BASE_URL}/people`;
 const PLANET_ENDPOINT = `${API_BASE_URL}/planets`;
 const ALLOWED_FILTERS = ['name', 'height', 'mass'];
+const parseValueBy = {
+  name: i => i,
+  height: i => toNumber(i),
+  mass: i => toNumber(i.replace(",", ""))
+}
 
 const fetchPeople = async ({ shouldSort, property }) => {
   const people = [];
@@ -22,7 +28,7 @@ const fetchPeople = async ({ shouldSort, property }) => {
     subset = await anotherResponse.json();
     people.push(...subset.results);
   }
-  return shouldSort? sortBy(people, property) : people;
+  return shouldSort? sortBy(people, person => parseValueBy[property](person[property])) : people;
 }
 
 app.get('/people', async (req, res) => { 
