@@ -1,0 +1,25 @@
+{
+  "name": "star-wars",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A little exercise using a Star Wars API [https://swapi.dev/](https://swapi.dev/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aailenm/star-wars.git"
+  },
+  "author": "ailen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aailenm/star-wars/issues"
+  },
+  "homepage": "https://github.com/aailenm/star-wars#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.1.1"
+  }
+}
